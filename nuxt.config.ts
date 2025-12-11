@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/test-utils',
     '@nuxtjs/tailwindcss',
+    '@nuxt/hints',
   ],
   typescript: {
     strict: true,
