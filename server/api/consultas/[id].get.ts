@@ -22,4 +22,3 @@ export default defineEventHandler((event): Consulta | null => {
 
   return consulta
 })
-

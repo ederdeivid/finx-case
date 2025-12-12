@@ -3,17 +3,6 @@ import { ref, nextTick } from 'vue'
 import type { Consulta, Convenio } from '~/types/consultasResponse'
 import type { Paginacao } from '~/types/paginacao'
 
-/**
- * Testes para a página de listagem de consultas
- *
- * Foco em testar os três estados principais:
- * - Loading: exibição do skeleton
- * - Empty State: quando não há resultados
- * - Listagem: exibição dos dados
- *
- * Os testes são agnósticos de API - mockam o composable useConsultasApi
- */
-
 // Mocks dos dados
 function createMockConsulta(overrides: Partial<Consulta> = {}): Consulta {
   return {
