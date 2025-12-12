@@ -7,12 +7,24 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
   modules: [
+    '@nuxtjs/tailwindcss',
     '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/test-utils',
-    '@nuxtjs/tailwindcss',
     '@nuxt/hints',
   ],
+  fonts: {
+    families: [
+      {
+        name: 'Inter',
+        provider: 'google',
+        weights: [400, 500, 600, 700],
+      },
+    ],
+    defaults: {
+      weights: [400, 500, 600, 700],
+    },
+  },
   extends: [
     './app/layers/consultas'
   ],

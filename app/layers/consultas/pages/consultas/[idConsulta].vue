@@ -4,10 +4,11 @@ import type { Consulta } from '~/types/consultasResponse'
 const route = useRoute()
 const router = useRouter()
 
+const consultaId = computed(() => route.params.idConsulta as string)
+
 const { data: consulta, status, error } = await useFetch<Consulta>(
   () => `/api/consultas/${consultaId.value}`,
 )
-const consultaId = computed(() => route.params.idConsulta as string)
 
 const isLoading = computed(() => status.value === 'pending')
 const errorMessage = computed(() => error.value?.message || null)
@@ -34,12 +35,12 @@ useHead({
 </script>
 
 <template>
-  <main class="min-h-screen bg-[#F5F5F5] dark:bg-slate-950">
+  <main class="min-h-screen bg-finx-bg">
     <div class="mx-auto max-w-7xl px-3 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
       <div class="mb-6 flex items-center gap-2">
         <button
           type="button"
-          class="inline-flex items-center justify-center rounded-full bg-white p-2 text-slate-500 shadow-sm transition-colors hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#1B9AAA]/50 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700"
+          class="inline-flex items-center justify-center rounded-full bg-white p-2 text-slate-500 shadow-sm transition-colors hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-finx-primary/50"
           aria-label="Voltar para a listagem de consultas"
           @click="handleGoBack"
         >
@@ -58,7 +59,7 @@ useHead({
             />
           </svg>
         </button>
-        <h1 class="text-xl font-bold text-[#2D4059] dark:text-white">
+        <h1 class="text-xl font-bold text-finx-heading">
           Detalhes da Consulta
         </h1>
       </div>

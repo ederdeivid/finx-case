@@ -19,7 +19,7 @@ const model = defineModel<string>({ required: true })
     <label
       v-if="props.label"
       :for="props.id"
-      class="mb-1 block text-xs font-medium text-slate-600 sm:mb-1.5 sm:text-sm dark:text-slate-300"
+      class="mb-1 block text-xs font-medium text-slate-600 sm:mb-1.5 sm:text-sm"
     >
       {{ props.label }}
     </label>
@@ -34,7 +34,7 @@ const model = defineModel<string>({ required: true })
         autocomplete="off"
         :placeholder="props.placeholder"
         :aria-label="props.label || props.placeholder"
-        class="block w-full rounded-lg border border-slate-300 bg-white py-2 pl-9 pr-3 text-sm text-slate-700 placeholder:text-slate-400 focus:border-[#1B9AAA] focus:outline-none focus:ring-2 focus:ring-[#1B9AAA]/20 sm:py-2.5 sm:pl-10 sm:pr-4 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder:text-slate-500 dark:focus:border-[#22B8CC]"
+        class="block w-full rounded-lg border border-slate-300 bg-white py-2 pl-9 pr-3 text-sm text-slate-700 placeholder:text-slate-400 focus:border-finx-text focus:outline-none focus:ring-2 focus:ring-finx-text/20 sm:py-2.5 sm:pl-10 sm:pr-4"
       >
     </div>
   </div>

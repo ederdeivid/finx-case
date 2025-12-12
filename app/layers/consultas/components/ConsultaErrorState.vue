@@ -27,7 +27,7 @@ const emit = defineEmits<{
   >
     <button
       type="button"
-      class="mt-4 inline-flex items-center rounded-lg bg-[#1B9AAA] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#147885] focus:outline-none focus:ring-2 focus:ring-[#1B9AAA]/50"
+      class="mt-4 inline-flex items-center rounded-lg bg-finx-text px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-finx-text/80 focus:outline-none focus:ring-2 focus:ring-finx-text/50"
       @click="emit('on-try-again')"
     >
       {{ props.buttonText }}

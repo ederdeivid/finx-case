@@ -40,11 +40,11 @@ function handleClick() {
     :aria-label="`Página ${props.page}`"
     :aria-current="props.isActive ? 'page' : undefined"
     :class="[
-      'inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-[#1B9AAA]/50',
+      'inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-finx-text/50',
       sizeClasses,
       props.isActive
-        ? 'bg-[#1B9AAA] text-white shadow-sm'
-        : 'border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600'
+        ? 'bg-finx-text text-white shadow-sm'
+        : 'border border-slate-300 bg-white text-slate-600 hover:bg-finx-text/20 cursor-pointer'
     ]"
     @click="handleClick"
   >

@@ -41,7 +41,7 @@ const hasActiveFilters = computed(() =>
 
 <template>
   <section
-    class="relative z-20 mb-4 rounded-xl border border-slate-200 bg-white p-3 shadow-sm sm:mb-6 sm:p-4 lg:p-5 dark:border-slate-700 dark:bg-slate-800"
+    class="relative z-20 mb-4 rounded-xl border border-slate-200 bg-white p-3 shadow-sm sm:mb-6 sm:p-4 lg:p-5"
     aria-label="Filtros de pesquisa"
   >
     <div class="flex flex-col gap-3 sm:gap-4 lg:flex-row lg:items-end">

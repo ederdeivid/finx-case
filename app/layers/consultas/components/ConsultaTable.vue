@@ -28,45 +28,45 @@ function handleRowClick(consulta: Consulta) {
 
 <template>
   <section
-    class="hidden flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm lg:flex dark:border-slate-700 dark:bg-slate-800"
+    class="hidden flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm lg:flex"
     role="region"
     aria-label="Tabela de consultas"
   >
-    <div class="max-h-[calc(100vh-380px)] min-h-[400px] overflow-auto">
-      <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700" role="grid">
-        <thead class="sticky top-0 z-10 bg-slate-50 dark:bg-slate-800/95">
+    <div class="max-h-[calc(100vh-380px)] min-h-100 overflow-auto">
+      <table class="min-w-full divide-y divide-slate-200" role="grid">
+        <thead class="sticky top-0 z-10 bg-slate-50">
           <tr>
             <th
               scope="col"
-              class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400"
+              class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-finx-text"
             >
               Paciente
             </th>
             <th
               scope="col"
-              class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400"
+              class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-finx-text"
             >
               Médico
             </th>
             <th
               scope="col"
-              class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400"
+              class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-finx-text"
             >
               Convênio
             </th>
             <th
               scope="col"
-              class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400"
+              class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-finx-text"
             >
               Data de Criação
             </th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-slate-100 bg-white dark:divide-slate-700/50 dark:bg-slate-800">
+        <tbody class="divide-y divide-slate-100 bg-white">
           <tr
             v-for="consulta in props.consultas"
             :key="consulta.id"
-            class="cursor-pointer transition-colors hover:bg-[#E8F7F9]/50 focus-within:bg-[#E8F7F9]/50 dark:hover:bg-slate-700/30 dark:focus-within:bg-slate-700/30"
+            class="cursor-pointer transition-colors hover:bg-finx-text/10 focus-within:bg-finx-text/10"
             tabindex="0"
             role="row"
             :aria-label="`Consulta de ${consulta.paciente.nome} com ${consulta.medico.nome}. Clique para ver detalhes.`"
@@ -76,18 +76,18 @@ function handleRowClick(consulta: Consulta) {
             <td class="whitespace-nowrap px-6 py-4">
               <div class="flex items-center">
                 <div
-                  class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#E8F7F9] dark:bg-[#1B9AAA]/20"
+                  class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-finx-text"
                   aria-hidden="true"
                 >
-                  <span class="text-sm font-medium text-[#1B9AAA] dark:text-[#22B8CC]">
+                  <span class="text-sm font-medium text-white">
                     {{ consulta.paciente.nome.charAt(0) }}
                   </span>
                 </div>
                 <div class="ml-4">
-                  <div class="text-sm font-medium text-slate-800 dark:text-white">
+                  <div class="text-sm font-semibold text-finx-text-primary">
                     {{ consulta.paciente.nome }}
                   </div>
-                  <div class="text-sm text-slate-500 dark:text-slate-400">
+                  <div class="text-sm font-semibold text-finx-text-secondary">
                     {{ calculateAge(consulta.paciente.dataNascimento) }} anos
                   </div>
                 </div>
@@ -95,19 +95,19 @@ function handleRowClick(consulta: Consulta) {
             </td>
 
             <td class="whitespace-nowrap px-6 py-4">
-              <div class="text-sm font-medium text-slate-800 dark:text-white">
+              <div class="text-sm font-semibold text-finx-text-primary">
                 {{ consulta.medico.nome }}
               </div>
             </td>
 
             <td class="whitespace-nowrap px-6 py-4">
-              <span class="inline-flex rounded-full bg-[#E8F7F9] px-2.5 py-1 text-xs font-medium text-[#147885] dark:bg-[#1B9AAA]/20 dark:text-[#22B8CC]">
+              <span class="flex justify-center items-center rounded-full bg-finx-text px-2.5 py-1 text-xs font-semibold text-white w-[75%]">
                 {{ consulta.convenio.nome }}
               </span>
             </td>
 
             <td class="whitespace-nowrap px-6 py-4">
-              <div class="text-sm text-slate-600 dark:text-slate-300">
+              <div class="text-sm font-semibold text-finx-text-primary">
                 <time :datetime="consulta.dataCriacao">
                   {{ formatDateTime(consulta.dataCriacao) }}
                 </time>

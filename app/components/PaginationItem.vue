@@ -57,14 +57,14 @@ function nextPage() {
 </script>
 
 <template>
-  <div class="hidden lg:flex items-center justify-between border-t border-slate-200 bg-slate-50 px-6 py-3 dark:border-slate-700 dark:bg-slate-800/80">
-    <div class="text-sm text-slate-500 dark:text-slate-400">
+  <div class="hidden lg:flex items-center justify-between border-t border-slate-200 bg-slate-50 px-6 py-3">
+    <div class="text-sm font-semibold text-finx-text-secondary">
       Mostrando
-      <span class="font-medium text-slate-700 dark:text-slate-200">{{ startItem }}</span>
+      <span class="font-semibold text-finx-text-primary">{{ startItem }}</span>
       a
-      <span class="font-medium text-slate-700 dark:text-slate-200">{{ endItem }}</span>
+      <span class="font-semibold text-finx-text-primary">{{ endItem }}</span>
       de
-      <span class="font-medium text-slate-700 dark:text-slate-200">{{ props.totalItems }}</span>
+      <span class="font-semibold text-finx-text-primary">{{ props.totalItems }}</span>
       resultados
     </div>
 
@@ -92,19 +92,18 @@ function nextPage() {
     </nav>
   </div>
 
-  <div class="flex lg:hidden flex-col gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between dark:border-slate-700 dark:bg-slate-800">
-    <div class="text-center text-sm text-slate-500 sm:text-left dark:text-slate-400">
+  <div class="flex lg:hidden flex-col gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+    <div class="text-center text-sm text-slate-500 sm:text-left">
       Página
-      <span class="font-semibold text-[#1B9AAA] dark:text-[#22B8CC]">{{ currentPage }}</span>
+      <span class="font-semibold text-finx-primary">{{ currentPage }}</span>
       de
-      <span class="font-semibold text-slate-700 dark:text-slate-200">{{ props.totalPages }}</span>
+      <span class="font-semibold text-slate-700">{{ props.totalPages }}</span>
     </div>
 
     <div class="flex items-center justify-center gap-2">
       <PaginationNavButton
         direction="prev"
         :disabled="isFirstPage"
-        :show-label="true"
         @click="previousPage"
       />
 
@@ -122,7 +121,6 @@ function nextPage() {
       <PaginationNavButton
         direction="next"
         :disabled="isLastPage"
-        :show-label="true"
         @click="nextPage"
       />
     </div>
