@@ -44,14 +44,12 @@ const mockConvenios: Convenio[] = [
   { id: 3, nome: 'Amil' },
 ]
 
-// Mock do composable
 const mockUseConsultasApi = vi.fn()
 
-vi.mock('~/composables/useConsultasApi', () => ({
+vi.mock('~/layers/consultas/composables/useConsultasApi', () => ({
   useConsultasApi: () => mockUseConsultasApi(),
 }))
 
-// Mock do useFetch para convênios
 vi.mock('#app', () => ({
   useFetch: vi.fn(() => ({
     data: ref(mockConvenios),
