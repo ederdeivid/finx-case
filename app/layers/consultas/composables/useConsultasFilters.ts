@@ -29,19 +29,36 @@ export function useConsultasFilters() {
 
   const filters = ref<ConsultasRequestParams>(getInitialFilters())
 
-  watch(filters, (newFilters) => syncFiltersToUrl(newFilters) , { deep: true })
+  watch(filters, (newFilters) => syncFiltersToUrl(newFilters), { deep: true })
 
   function syncFiltersToUrl(newFilters: ConsultasRequestParams) {
-    const query: Record<string, string | undefined> = {}
+    const query: Record<string, string> = {}
 
-    if ((newFilters?.paginaAtual || 1) > 1) query.paginaAtual = String(newFilters.paginaAtual)
-    if (newFilters?.nomeMedico) query.nomeMedico = newFilters.nomeMedico
-    if (newFilters?.nomePaciente) query.nomePaciente = newFilters.nomePaciente
-    if (newFilters?.nomeConvenio?.length) query.nomeConvenio = newFilters.nomeConvenio.join(',')
-    if (newFilters?.dataCriacao) query.dataCriacao = newFilters.dataCriacao
-    if (newFilters?.ordem !== 'desc') query.ordem = newFilters.ordem
+    if (newFilters.paginaAtual && newFilters.paginaAtual > 1) {
+      query.paginaAtual = String(newFilters.paginaAtual)
+    }
 
-    router.replace({ query: { ...route.query, ...query } })
+    if (newFilters.nomeMedico) {
+      query.nomeMedico = newFilters.nomeMedico
+    }
+
+    if (newFilters.nomePaciente) {
+      query.nomePaciente = newFilters.nomePaciente
+    }
+
+    if (newFilters.nomeConvenio && newFilters.nomeConvenio.length > 0) {
+      query.nomeConvenio = newFilters.nomeConvenio.join(',')
+    }
+
+    if (newFilters.dataCriacao) {
+      query.dataCriacao = newFilters.dataCriacao
+    }
+
+    if (newFilters.ordem && newFilters.ordem !== 'desc') {
+      query.ordem = newFilters.ordem
+    }
+
+    router.replace({ query })
   }
 
   function updateFilters(newFilters: Partial<ConsultasRequestParams>) {
@@ -60,12 +77,17 @@ export function useConsultasFilters() {
       itensPorPagina: ITEMS_PER_PAGE,
       ordenarPor: 'dataCriacao',
       ordem: 'desc',
+      nomeMedico: undefined,
+      nomePaciente: undefined,
+      nomeConvenio: undefined,
+      dataCriacao: undefined,
     }
   }
 
   return {
     filters,
     updateFilters,
-    clearFilters
+    clearFilters,
+    getInitialFilters,
   }
 }

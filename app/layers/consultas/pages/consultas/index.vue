@@ -28,6 +28,7 @@ const currentPage = ref(paginacao.value?.paginaAtual || 1)
 let debounceTimer: ReturnType<typeof setTimeout> | null = null
 
 function handleMedicoChange(value: string) {
+  inputMedico.value = value
   if (debounceTimer) clearTimeout(debounceTimer)
   debounceTimer = setTimeout(() => {
     updateFilters({ nomeMedico: value || undefined })
@@ -35,17 +36,29 @@ function handleMedicoChange(value: string) {
 }
 
 function handlePacienteChange(value: string) {
+  inputPaciente.value = value
   if (debounceTimer) clearTimeout(debounceTimer)
   debounceTimer = setTimeout(() => {
     updateFilters({ nomePaciente: value || undefined })
   }, 400)
 }
 
+function handleConvenioChange(value: string[]) {
+  nomeConvenio.value = value
+  updateFilters({ nomeConvenio: value.length > 0 ? value : undefined })
+}
+
 function handleClearFilters() {
+  if (debounceTimer) clearTimeout(debounceTimer)
   inputMedico.value = ''
   inputPaciente.value = ''
   nomeConvenio.value = []
   clearFilters()
+}
+
+function handlePageChange(page: number) {
+  currentPage.value = page
+  goToPage(page)
 }
 
 function navigateToConsulta(consulta: Consulta) {
@@ -68,33 +81,25 @@ const shouldRenderTableData = computed<boolean>(() => {
   return Boolean(consultas.value?.length && !error.value && !isLoading.value)
 })
 
-watch(inputMedico, handleMedicoChange)
-watch(inputPaciente, handlePacienteChange)
-
-watch(nomeConvenio, (value) => {
-  updateFilters({ nomeConvenio: value.length > 0 ? value : undefined })
-})
-
-watch(currentPage, (page) => {
-  goToPage(page)
-})
-
+// Sincroniza apenas da API para os inputs locais (não o contrário)
 watch(() => paginacao.value?.paginaAtual, (val) => {
-  if (!val) return
-  currentPage.value = val
+  if (val) currentPage.value = val
 })
 
 watch(() => filters.value.nomeMedico, (val) => {
-  inputMedico.value = val || ''
+  if (val !== inputMedico.value) inputMedico.value = val || ''
 })
 
 watch(() => filters.value.nomePaciente, (val) => {
-  inputPaciente.value = val || ''
+  if (val !== inputPaciente.value) inputPaciente.value = val || ''
 })
 
 watch(() => filters.value.nomeConvenio, (val) => {
-  nomeConvenio.value = val || []
-})
+  const newValue = val || []
+  if (JSON.stringify(newValue) !== JSON.stringify(nomeConvenio.value)) {
+    nomeConvenio.value = newValue
+  }
+}, { deep: true })
 
 useHead({
   title: 'Consultas - Fin-X',
@@ -117,6 +122,9 @@ useHead({
         :total-results="totalItems"
         :is-loading="isLoading"
         :sort-order="sortOrder"
+        @update:nome-medico="handleMedicoChange"
+        @update:nome-paciente="handlePacienteChange"
+        @update:nome-convenio="handleConvenioChange"
         @clear="handleClearFilters"
         @toggle-sort="toggleSortOrder"
       />
@@ -149,6 +157,7 @@ useHead({
               :total-pages="totalPages"
               :total-items="totalItems"
               :items-per-page="itemsPerPage"
+              @update:current-page="handlePageChange"
             />
           </template>
         </ConsultasConsultaTable>
@@ -164,6 +173,7 @@ useHead({
               :total-pages="totalPages"
               :total-items="totalItems"
               :items-per-page="itemsPerPage"
+              @update:current-page="handlePageChange"
             />
           </template>
         </ConsultasConsultaCards>

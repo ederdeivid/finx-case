@@ -11,4 +11,3 @@ const convenios: Convenio[] = [
 export default defineCachedEventHandler((): Convenio[] => {
   return convenios
 })
-
