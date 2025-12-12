@@ -6,15 +6,26 @@ type FilterFn = (consulta: Consulta, value: string) => boolean
 
 export function applyFilters(data: Consulta[], filtros: ConsultasRequestParams): Consulta[] {
   let result = [...data]
-  const filterKeys = ['nomeMedico', 'nomePaciente', 'nomeConvenio', 'dataCriacao'] as const
 
-  for (const key of filterKeys) {
+  // Filtros de texto simples
+  const textFilterKeys = ['nomeMedico', 'nomePaciente', 'dataCriacao'] as const
+
+  for (const key of textFilterKeys) {
     const value = filtros[key]
     const strategy = filterStrategies[key]
 
     if (value && strategy) {
       result = result.filter((consulta) => strategy(consulta, value))
     }
+  }
+
+  // Filtro de convênios (array)
+  if (filtros.nomeConvenio && filtros.nomeConvenio.length > 0) {
+    const conveniosNormalized = filtros.nomeConvenio.map(c => stringNormalize(c))
+    result = result.filter((consulta) => {
+      const convenioNormalized = stringNormalize(consulta.convenio.nome)
+      return conveniosNormalized.some(c => convenioNormalized.includes(c))
+    })
   }
 
   return result
@@ -29,11 +40,6 @@ const filterStrategies: Record<string, FilterFn> = {
   nomePaciente: (consulta, value) => {
     const regex = regexBuilder(value)
     return regex.test(stringNormalize(consulta.paciente.nome))
-  },
-
-  nomeConvenio: (consulta, value) => {
-    const regex = regexBuilder(value)
-    return regex.test(stringNormalize(consulta.convenio.nome))
   },
 
   dataCriacao: (consulta, value) =>
