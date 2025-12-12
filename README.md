@@ -45,6 +45,8 @@ Certifique-se de estar utilizando as versões corretas de Node e npm:
 ## 🌐 Acesso à Aplicação
 
 - **Local:** [http://localhost:3000](http://localhost:3000)
+- **Online:** [https://finx-case.pages.dev/](https://finx-case.pages.dev/)  
+- **API:** [https://finx-case.pages.dev/api/consultas](https://finx-case.pages.dev/api/consultas)
 
 ---
 
