@@ -1,0 +1,139 @@
+# Fin-X Frontend - Cursor Rules
+
+## Stack Tecnológica
+- **Framework**: Nuxt 4 com Vue 3
+- **Linguagem**: TypeScript (strict mode)
+- **Estilização**: Tailwind CSS
+- **Estado**: Vue Composition API com composables
+
+## Estrutura de Pastas
+```
+app/
+├── types/          # Interfaces e tipos TypeScript
+├── mocks/          # Dados mock para desenvolvimento
+├── composables/    # Lógica reutilizável (use*.ts)
+├── pages/          # Páginas do Nuxt (file-based routing)
+├── components/     # Componentes Vue reutilizáveis
+└── assets/css/     # Estilos globais e variáveis
+```
+
+## Princípios de Código
+
+### SOLID - Single Responsibility
+- Cada composable deve ter UMA única responsabilidade
+- Exemplos: `useSurgicalRequestFilters` (apenas filtragem), `usePatientAge` (apenas cálculo de idade), `useDateFormat` (apenas formatação)
+
+### Comentários de Refatoração
+- Use `// Isso pode ser separado:` seguido de sugestão quando código inline puder ser extraído
+- Exemplo: `// Isso pode ser separado: components/Pagination.vue`
+
+### Nomenclatura
+- **Campos de negócio em português**: `medico`, `paciente`, `convenio`, `dataNascimento`, `dataCriacao`
+- **Código e variáveis em inglês**: `filteredRequests`, `currentPage`, `toggleConvenio`
+- **Composables**: prefixo `use` + PascalCase (ex: `useSurgicalRequestFilters`)
+- **Types**: PascalCase (ex: `SurgicalRequest`, `Medico`, `Paciente`)
+
+## Cores da Marca Fin-X
+```css
+--finx-primary: #1B9AAA;      /* Teal principal */
+--finx-primary-dark: #147885; /* Teal escuro */
+--finx-primary-light: #E8F7F9; /* Teal claro (backgrounds) */
+--finx-secondary: #2D4059;    /* Azul escuro (textos) */
+--finx-bg: #F5F5F5;           /* Cinza claro (background) */
+```
+
+### Uso das Cores no Tailwind
+- Primária: `bg-[#1B9AAA]`, `text-[#1B9AAA]`
+- Hover/Focus: `hover:bg-[#E8F7F9]`, `focus:ring-[#1B9AAA]/20`
+- Textos: `text-slate-700` (principal), `text-slate-500` (secundário)
+- Badges: `bg-[#E8F7F9] text-[#147885]`
+
+## Responsividade
+
+### Breakpoints
+- **Mobile**: < 640px (default)
+- **Tablet**: sm (640px+)
+- **Desktop**: lg (1024px+)
+
+### Padrão de Layout
+- **Mobile/Tablet**: Cards empilhados
+- **Desktop**: Tabela com colunas
+```vue
+<section class="hidden lg:block"><!-- Tabela Desktop --></section>
+<section class="lg:hidden"><!-- Cards Mobile --></section>
+```
+
+### Espaçamentos Responsivos
+```
+px-3 sm:px-6 lg:px-8
+py-4 sm:py-6 lg:py-8
+gap-3 sm:gap-4
+```
+
+## Componentes de UI
+
+### Inputs
+```vue
+<input class="rounded-lg border border-slate-300 bg-white py-2 px-3 text-sm 
+  focus:border-[#1B9AAA] focus:ring-2 focus:ring-[#1B9AAA]/20" />
+```
+
+### Botões Primários
+```vue
+<button class="bg-[#1B9AAA] text-white rounded-lg px-4 py-2 hover:bg-[#147885]">
+```
+
+### Botões Secundários
+```vue
+<button class="border border-slate-300 bg-white text-slate-600 rounded-lg px-4 py-2 hover:bg-slate-50">
+```
+
+### Badges/Tags
+```vue
+<span class="inline-flex rounded-full bg-[#E8F7F9] px-2.5 py-1 text-xs font-medium text-[#147885]">
+```
+
+### Cards
+```vue
+<article class="rounded-xl border border-slate-200 bg-white shadow-sm">
+```
+
+## Paginação
+- Implementar para listas com muitos itens
+- Desktop: números de página com "..." para navegação
+- Mobile: simplificado com anterior/próximo e 3 números visíveis
+- Reset automático ao aplicar filtros
+
+## TypeScript
+
+### Interfaces
+```typescript
+// Sempre definir interfaces para dados da API
+export interface SurgicalRequest {
+  id: number
+  medico: Medico
+  paciente: Paciente
+  convenio: Convenio
+  dataCriacao: string
+}
+```
+
+### Composables
+```typescript
+// Sempre tipar refs e computed
+const currentPage = ref<number>(1)
+const filteredRequests = computed<SurgicalRequest[]>(() => ...)
+```
+
+## Dark Mode
+- Sempre incluir variantes `dark:` para suporte a tema escuro
+- Usar `dark:bg-slate-800`, `dark:text-white`, `dark:border-slate-700`
+
+## Acessibilidade
+- Usar `aria-label` em seções e controles
+- Usar `role` em elementos interativos (listbox, option)
+- Incluir `aria-selected` em itens selecionáveis
+- Labels associados aos inputs com `for`/`id`
+
+
+

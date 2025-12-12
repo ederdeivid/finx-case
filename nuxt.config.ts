@@ -13,6 +13,9 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/hints',
   ],
+  extends: [
+    './app/layers/consultas'
+  ],
   router: {
     options: {
       hashMode: false,

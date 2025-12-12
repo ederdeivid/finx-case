@@ -107,9 +107,9 @@ useHead({
 <template>
   <main class="min-h-screen bg-[#F5F5F5] dark:bg-slate-950">
     <div class="mx-auto max-w-7xl px-3 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
-      <ConsultasHeader />
+      <ConsultasConsultaHeader />
 
-      <ConsultasFilters
+      <ConsultasConsultaFilters
         v-model:nome-medico="inputMedico"
         v-model:nome-paciente="inputPaciente"
         v-model:nome-convenio="nomeConvenio"
@@ -121,7 +121,7 @@ useHead({
         @toggle-sort="toggleSortOrder"
       />
 
-      <ConsultasErrorState
+      <ConsultasConsultaErrorState
         :error-message="(error?.message as string)"
         :is-loading="isLoading"
         @on-try-again="() => updateFilters({})"
@@ -138,7 +138,7 @@ useHead({
       </template>
 
       <template v-if="shouldRenderTableData">
-        <ConsultasTable
+        <ConsultasConsultaTable
           :consultas="consultas"
           @row-click="navigateToConsulta"
         >
@@ -151,9 +151,9 @@ useHead({
               :items-per-page="itemsPerPage"
             />
           </template>
-        </ConsultasTable>
+        </ConsultasConsultaTable>
 
-        <ConsultasCards
+        <ConsultasConsultaCards
           :consultas="consultas"
           @card-click="navigateToConsulta"
         >
@@ -166,7 +166,7 @@ useHead({
               :items-per-page="itemsPerPage"
             />
           </template>
-        </ConsultasCards>
+        </ConsultasConsultaCards>
       </template>
     </div>
   </main>
