@@ -42,4 +42,14 @@ export default defineNuxtConfig({
     viewTransition: true,
     payloadExtraction: true,
   },
+  nitro: {
+    preset: 'cloudflare-pages',
+    logLevel: 'verbose',
+    output: {
+      dir: 'dist'
+    },
+    experimental: {
+      wasm: false
+    }
+  },
 })
