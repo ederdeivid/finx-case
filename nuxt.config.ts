@@ -13,8 +13,18 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/hints',
   ],
+  router: {
+    options: {
+      hashMode: false,
+    },
+  },
   typescript: {
     strict: true,
     typeCheck: true
+  },
+  experimental: {
+    componentIslands: true,
+    viewTransition: true,
+    payloadExtraction: true,
   },
 })
