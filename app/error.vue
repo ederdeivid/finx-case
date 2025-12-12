@@ -26,29 +26,29 @@ function handleGoHome() {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-[#E8F7F9] to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-finx-primary-light to-slate-100">
     <div class="flex min-h-screen flex-col items-center justify-center px-4 py-8">
       <div class="relative mb-8">
-        <div class="absolute -inset-4 rounded-full bg-[#1B9AAA]/10 blur-2xl dark:bg-[#1B9AAA]/5" />
+        <div class="absolute -inset-4 rounded-full bg-finx-primary/10 blur-2xl" />
 
         <div class="relative">
-          <span class="text-8xl font-black tracking-tighter text-[#1B9AAA] sm:text-9xl dark:text-[#22B8CC]">
+          <span class="text-8xl font-black tracking-tighter text-finx-primary sm:text-9xl">
             {{ error.statusCode }}
           </span>
         </div>
       </div>
 
       <div class="max-w-md text-center">
-        <h1 class="mb-3 text-2xl font-bold text-[#2D4059] sm:text-3xl dark:text-white">
+        <h1 class="mb-3 text-2xl font-bold text-finx-heading sm:text-3xl">
           {{ title }}
         </h1>
-        <p class="mb-8 text-sm text-slate-600 sm:text-base dark:text-slate-400">
+        <p class="mb-8 text-sm text-slate-600 sm:text-base">
           {{ description }}
         </p>
 
         <button
           type="button"
-          class="inline-flex items-center gap-2 rounded-xl bg-[#1B9AAA] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#1B9AAA]/25 transition-all hover:bg-[#147885] hover:shadow-xl hover:shadow-[#1B9AAA]/30 focus:outline-none focus:ring-2 focus:ring-[#1B9AAA]/50 focus:ring-offset-2 sm:text-base dark:shadow-[#1B9AAA]/10 dark:hover:shadow-[#1B9AAA]/20"
+          class="inline-flex items-center gap-2 rounded-xl bg-finx-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-finx-primary/25 transition-all hover:bg-finx-primary-dark hover:shadow-xl hover:shadow-finx-primary/30 focus:outline-none focus:ring-2 focus:ring-finx-primary/50 focus:ring-offset-2 sm:text-base"
           @click="handleGoHome"
         >
           <svg
@@ -71,12 +71,12 @@ function handleGoHome() {
 
       <div
         v-if="error.stack && isDev"
-        class="mt-12 max-w-2xl rounded-lg border border-slate-200 bg-white/80 p-4 text-left backdrop-blur dark:border-slate-700 dark:bg-slate-800/80"
+        class="mt-12 max-w-2xl rounded-lg border border-slate-200 bg-white/80 p-4 text-left backdrop-blur"
       >
-        <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+        <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
           Stack trace (dev only)
         </p>
-        <pre class="overflow-x-auto text-xs text-slate-600 dark:text-slate-300">{{ error.stack }}</pre>
+        <pre class="overflow-x-auto text-xs text-slate-600">{{ error.stack }}</pre>
       </div>
     </div>
   </div>

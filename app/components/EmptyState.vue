@@ -14,16 +14,16 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div
-    class="rounded-xl border border-slate-200 bg-white px-4 py-12 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800"
+    class="rounded-xl border border-slate-200 bg-white px-4 py-12 text-center shadow-sm"
   >
-    <icons-search-icon v-if="props.icon === 'search'" />
-    <icons-empty-icon v-else-if="props.icon === 'empty'" />
-    <icons-error-icon v-else-if="props.icon === 'error'" />
+    <IconsSearchIcon v-if="props.icon === 'search'" class="mx-auto h-10 w-10 text-finx-text" />
+    <IconsEmptyIcon v-else-if="props.icon === 'empty'" class="mx-auto h-10 w-10 text-finx-text" />
+    <IconsErrorIcon v-else-if="props.icon === 'error'" class="mx-auto h-10 w-10 text-finx-text" />
 
-    <h3 class="mt-2 text-sm font-medium text-slate-700 dark:text-white">
+    <h3 class="mt-2 text-sm font-semibold text-finx-text-primary">
       {{ props.title }}
     </h3>
-    <p class="mt-1 text-xs text-slate-500 sm:text-sm dark:text-slate-400">
+    <p class="mt-1 text-xs font-semibold text-finx-text-secondary sm:text-sm">
       {{ props.description }}
     </p>
     <slot />

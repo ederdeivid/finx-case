@@ -28,7 +28,7 @@ const ariaLabel = computed(() =>
 <template>
   <button
     type="button"
-    class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 transition-colors hover:text-[#1B9AAA] focus:outline-none focus:text-[#1B9AAA] sm:text-sm dark:text-slate-400 dark:hover:text-[#22B8CC]"
+    class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 transition-colors hover:text-finx-text focus:outline-none focus:text-finx-text sm:text-sm"
     :aria-label="ariaLabel"
     @click="emit('toggle')"
   >
@@ -48,7 +48,7 @@ const ariaLabel = computed(() =>
     </svg>
     <span>{{ currentLabel }}</span>
 
-    <IconsArrowDownIcon :is-open="Boolean(props.order === 'asc')" />
+    <IconsArrowDownIcon class="h-4 w-4" :is-open="Boolean(props.order === 'asc')" />
   </button>
 </template>
 
