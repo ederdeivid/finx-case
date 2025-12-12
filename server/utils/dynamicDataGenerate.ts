@@ -17,19 +17,23 @@ export function dynamicDataGenerate(amount: number): Consulta[] {
       medico: { nome: `Medico ${index}` },
       paciente: {
         nome: `Paciente ${index}`,
-        dataNascimento: randomBirthDate()
+        dataNascimento: normalizeBirthDate()
       },
       convenio: randomConvenio(),
-      dataCriacao: new Date().toISOString(),
+      dataCriacao: randomDateGenerate(2015, 2023),
     };
   });
 }
 
-function randomBirthDate(): string {
-  const start = new Date(1950, 0, 1).getTime()
-  const end = new Date(2000, 11, 31).getTime()
+function randomDateGenerate(minYear = 1950, maxYear = 2000): string {
+  const start = new Date(minYear, 0, 1).getTime()
+  const end = new Date(maxYear, 11, 31).getTime()
   const timestamp = Math.floor(Math.random() * (end - start) + start)
-  return new Date(timestamp).toISOString().split("T")[0] as string
+  return new Date(timestamp).toISOString()
+}
+
+function normalizeBirthDate(): string {
+  return randomDateGenerate().split("T")[0] as string
 }
 
 function randomConvenio(): Convenio {
