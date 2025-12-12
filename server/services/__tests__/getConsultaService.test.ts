@@ -228,7 +228,6 @@ describe('getConsultaService', () => {
 
       const result = await mockGetConsultaService({ itensPorPagina: 10 })
 
-      // 47 itens / 10 por página = 5 páginas (arredondado para cima)
       expect(result.paginacao.totalDePaginas).toBe(5)
       expect(result.paginacao.totalDeItens).toBe(47)
     })
@@ -323,11 +322,32 @@ describe('getConsultaService', () => {
       )
 
       const result = await mockGetConsultaService({
-        nomeConvenio: 'Convênio Inexistente',
+        nomeConvenio: ['Convênio Inexistente'],
       })
 
       expect(result.data).toEqual([])
       expect(result.paginacao.totalDeItens).toBe(0)
+    })
+
+    it('deve filtrar por múltiplos convênios', async () => {
+      const mockConsultas = [
+        createMockConsulta({ id: 1, convenio: { id: 1, nome: 'Unimed' } }),
+        createMockConsulta({ id: 2, convenio: { id: 2, nome: 'Bradesco' } }),
+      ]
+
+      mockGetConsultaService.mockResolvedValue(
+        createMockResponse(mockConsultas, {
+          totalDeItens: 2,
+          totalDePaginas: 1,
+        })
+      )
+
+      const result = await mockGetConsultaService({
+        nomeConvenio: ['Unimed', 'Bradesco'],
+      })
+
+      expect(result.data).toHaveLength(2)
+      expect(result.paginacao.totalDeItens).toBe(2)
     })
 
     it('deve retornar lista vazia quando filtro por data não encontrar resultados', async () => {
@@ -367,6 +387,57 @@ describe('getConsultaService', () => {
       expect(typeof result.paginacao.itensPorPagina).toBe('number')
       expect(typeof result.paginacao.totalDePaginas).toBe('number')
       expect(typeof result.paginacao.totalDeItens).toBe('number')
+    })
+  })
+
+  describe('Ordenação', () => {
+    it('deve ordenar por dataCriacao em ordem decrescente por padrão', async () => {
+      const sortedConsultas = [
+        createMockConsulta({ id: 2, dataCriacao: '2024-01-16T10:00:00Z' }),
+        createMockConsulta({ id: 1, dataCriacao: '2024-01-15T10:00:00Z' }),
+        createMockConsulta({ id: 3, dataCriacao: '2024-01-14T10:00:00Z' }),
+      ]
+
+      mockGetConsultaService.mockResolvedValue(
+        createMockResponse(sortedConsultas, { totalDeItens: 3 })
+      )
+
+      const result = await mockGetConsultaService({ ordenarPor: 'dataCriacao', ordem: 'desc' })
+
+      expect(result.data[0].id).toBe(2)
+      expect(result.data[1].id).toBe(1)
+      expect(result.data[2].id).toBe(3)
+    })
+
+    it('deve ordenar por dataCriacao em ordem crescente quando especificado', async () => {
+      const sortedConsultas = [
+        createMockConsulta({ id: 3, dataCriacao: '2024-01-14T10:00:00Z' }),
+        createMockConsulta({ id: 1, dataCriacao: '2024-01-15T10:00:00Z' }),
+        createMockConsulta({ id: 2, dataCriacao: '2024-01-16T10:00:00Z' }),
+      ]
+
+      mockGetConsultaService.mockResolvedValue(
+        createMockResponse(sortedConsultas, { totalDeItens: 3 })
+      )
+
+      const result = await mockGetConsultaService({ ordenarPor: 'dataCriacao', ordem: 'asc' })
+
+      expect(result.data[0].id).toBe(3)
+      expect(result.data[1].id).toBe(1)
+      expect(result.data[2].id).toBe(2)
+    })
+
+    it('deve aceitar parâmetros de ordenação', async () => {
+      mockGetConsultaService.mockResolvedValue(
+        createMockResponse([createMockConsulta()], { totalDeItens: 1 })
+      )
+
+      await mockGetConsultaService({ ordenarPor: 'dataCriacao', ordem: 'asc' })
+
+      expect(mockGetConsultaService).toHaveBeenCalledWith({
+        ordenarPor: 'dataCriacao',
+        ordem: 'asc',
+      })
     })
   })
 })
