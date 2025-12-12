@@ -63,11 +63,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="relative multi-select-dropdown w-full sm:w-48 lg:w-56">
+  <div class="relative multi-select-dropdown w-full">
     <label
       v-if="props.label"
       :for="props.id"
-      class="mb-1 block text-xs font-medium text-slate-600 sm:mb-1.5 sm:text-sm dark:text-slate-300"
+      class="mb-1 block text-xs font-medium text-slate-600 sm:mb-1.5 sm:text-sm"
     >
       {{ props.label }}
     </label>
@@ -77,16 +77,16 @@ onUnmounted(() => {
       :aria-expanded="isOpen"
       :aria-haspopup="true"
       :aria-label="props.label ? `${props.label}: ${selectedLabels}` : selectedLabels"
-      class="flex w-full items-center justify-between rounded-lg border border-slate-300 bg-white px-3 py-2 text-left text-sm text-slate-700 focus:border-[#1B9AAA] focus:outline-none focus:ring-2 focus:ring-[#1B9AAA]/20 sm:px-4 sm:py-2.5 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+      class="flex w-full items-center justify-between rounded-lg border border-slate-300 bg-white px-3 py-2 text-left text-sm text-slate-700 focus:border-finx-text focus:outline-none focus:ring-2 focus:ring-finx-text/20 sm:px-4 sm:py-2.5"
       @click="isOpen = !isOpen"
     >
       <span class="truncate text-sm">{{ selectedLabels }}</span>
-      <icons-arrow-down-icon :is-open="isOpen" />
+      <IconsArrowDownIcon class="h-4 w-4" :is-open="isOpen" />
     </button>
 
     <div
       v-show="isOpen"
-      class="absolute left-0 right-0 z-50 mt-1 rounded-lg border border-slate-200 bg-white shadow-lg sm:left-auto sm:right-0 sm:w-64 dark:border-slate-600 dark:bg-slate-700"
+      class="absolute left-0 right-0 z-50 mt-1 rounded-lg border border-slate-200 bg-white shadow-lg sm:left-auto sm:right-0 sm:w-64"
     >
       <ul
         class="max-h-60 overflow-auto py-1"
@@ -97,7 +97,7 @@ onUnmounted(() => {
         <li
           v-for="option in props.options"
           :key="option.id"
-          class="cursor-pointer px-3 py-2 hover:bg-[#E8F7F9] focus-within:bg-[#E8F7F9] sm:px-4 dark:hover:bg-slate-600 dark:focus-within:bg-slate-600"
+          class="cursor-pointer px-3 py-2 hover:bg-finx-text/20 focus-within:bg-finx-text/20 sm:px-4"
           role="option"
           :aria-selected="model.includes(option.id)"
           @click.prevent="toggle(option.id)"
@@ -110,11 +110,11 @@ onUnmounted(() => {
               type="checkbox"
               :checked="model.includes(option.id)"
               :aria-label="option.nome"
-              class="h-4 w-4 rounded border-slate-300 text-[#1B9AAA] focus:ring-[#1B9AAA] focus:ring-offset-0 dark:border-slate-500 dark:bg-slate-600"
+              class="h-4 w-4 rounded border-slate-300 text-finx-text focus:ring-finx-text focus:ring-offset-0"
               @click.stop
               @change="toggle(option.id)"
             >
-            <span class="ml-3 text-sm text-slate-700 dark:text-slate-200">
+            <span class="ml-3 text-sm text-slate-700">
               {{ option.nome }}
             </span>
           </label>

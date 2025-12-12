@@ -110,7 +110,7 @@ useHead({
 </script>
 
 <template>
-  <main class="min-h-screen bg-[#F5F5F5] dark:bg-slate-950">
+  <main class="min-h-screen bg-finx-bg">
     <div class="mx-auto max-w-7xl px-3 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
       <ConsultasConsultaHeader />
 
