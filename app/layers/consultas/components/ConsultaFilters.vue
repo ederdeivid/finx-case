@@ -31,9 +31,6 @@ function handleConvenioUpdate(values: (string | number)[]) {
 }
 
 function handleClear() {
-  nomeMedico.value = ''
-  nomePaciente.value = ''
-  nomeConvenio.value = []
   emit('clear')
 }
 
